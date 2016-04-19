@@ -21,7 +21,6 @@ limitations under the License.
 #include "files.h"
 #include "string.h"
 
-
 //------------------------------------------------------------------------------
 //Master boot record (MBR) at LBA = 0
 //------------------------------------------------------------------------------
@@ -224,7 +223,7 @@ void RootRecordInit( void)
 
 void RootRecordGet( uint8_t * buffer, uint8_t seg)
 {
-    memset( (void*)buffer, 0, FILEIO_CONFIG_MEDIA_SECTOR_SIZE);
+   memset( (void*)buffer, 0, MSD_IN_EP_SIZE);  // buffer is only 64 bytes large!
    if (seg == 0) {
         memcpy( (void*)&buffer[ 0], (const void*)entry0, ROOT_ENTRY_SIZE ); 
         // add the README.HTM file
