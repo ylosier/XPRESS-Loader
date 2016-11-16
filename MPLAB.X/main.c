@@ -52,7 +52,19 @@ MAIN_RETURN main(void)
          * else since we don't have a host to talk to.  So jump back to the
          * top of the while loop. */
         if( USBGetDeviceState() < CONFIGURED_STATE )
-        {
+        {   /* USB connection not available or not yet complete */
+            // implement nMCLR button 
+            if ( BUTTON_IsPressed(BUTTON_S1)) {
+                ICSP_nMCLR = SLAVE_RESET;
+                LED_Off(GREEN_LED);     // RED = target RESET
+                LED_On (RED_LED);
+            }
+            else { // release 
+                ICSP_nMCLR = SLAVE_RUN;
+                LED_Off(GREEN_LED);   // both LED off, not connected
+                LED_Off(RED_LED);
+            }
+            
             /* Jump back to the top of the while loop. */
             continue;
         }

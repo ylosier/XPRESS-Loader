@@ -191,6 +191,7 @@ void DIRECT_Initialize( void) {
     memset((void*)row, 0xff, sizeof(row));    // fill buffer with blanks
     row_address = 0x8000;
     lvp = false;
+    LVP_init();
 }
 
 /**
